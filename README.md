@@ -84,16 +84,16 @@ The repository contains several directories:
 
 
 ## Prerequisites
-- JavaCard Development Kit 3.0.1 (or above) from
-  [Oracle website](http://www.oracle.com/technetwork/java/embedded/javacard/downloads/index.html);
+
+- A Java compiler
 
 - A device compliant with JavaCard 3.0.1 (or above) with enough
   available resources to hold the code (approximately 23 kB of
   non-volatile memory), persistent data (approximately 10 kB of
   non-volatile memory) and volatile data (approximately 2 kB of RAM).
 
-- The [pyscard](https://pypi.org/project/pyscard/) and [pyasn1](https://pypi.org/project/pyasn1/)
-  Python libraries for `smartcard-cli`.
+<!-- - The [pyscard](https://pypi.org/project/pyscard/) and [pyasn1](https://pypi.org/project/pyasn1/)
+  Python libraries for `smartcard-cli`. -->
 
 
 ## Importing RSA keys above 2048 bits (3072 or 4096 bits)
@@ -135,16 +135,12 @@ resource consumption by tweaking the following variables:
 
 ## Building the CAP file
 
-- Set path to the JavaCard Development Kit:
-  `export JC_HOME="your/path/to/javacardkit"`
-
-- (Optional) Edit the `build.xml` file and replace the `0xAF:0xAF`
-  bytes in the `APPLET_AID` with your own manufacturer identifier (see
-  section 4.2.1 of OpenPGP card specification). Alternatively, set the
+- (Optional) Edit the `build.xml` file and replace the `APPLET_AID`
+  with your a unique value. Alternatively, set the
   right AID instance bytes during applet installation.
+  Generate the AID using [this tool](https://c0de.dev/c0de/SmartPGP-AID-Generator)
 
-- Execute `ant` with no parameter will produce the CAP file in
-  `SmartPGPApplet.cap`.
+- Execute `ant` with no parameter to build `SmartPGPApplet.cap`
 
 ## Installing the CAP file
 
@@ -157,3 +153,7 @@ Be careful to use a valid AID according to the OpenPGP card
 specification (see section 4.2.1) for each card (`-create <AID>` with
 GlobalPlatformPro)
 
+Example Installation commands: 
+
+- `gp --install SmartPGPApplet.cap --default`
+- `gp --install SmartPGPApplet.cap --create <AID>`
