@@ -3,6 +3,7 @@
 
 # OpenPGPpy : Reset device demo
 # Copyright (C) 2020  BitLogiK
+# Copyright (C) 2023 Code Fox <SmartPGP@c0de.dev>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

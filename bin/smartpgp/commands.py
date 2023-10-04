@@ -1,6 +1,7 @@
 # SmartPGP : JavaCard implementation of OpenPGP card v3 specification
-# https://github.com/ANSSI-FR/SmartPGP
+# https://c0de.dev/c0de/SmartPGP
 # Copyright (C) 2016 ANSSI
+# Copyright (C) 2023 Code Fox <SmartPGP@c0de.dev>
 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
