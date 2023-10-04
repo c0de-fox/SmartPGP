@@ -1,2 +1,4 @@
 *.jar
 *.cap
+*/.venv/*
+*.pyc
