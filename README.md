@@ -17,6 +17,17 @@ of them depend on underlying hardware support and available
 - Command and response chaining
 - AES 128/256 bits deciphering primitive
 
+## Warnings
+
+### ROCA
+
+[Infineon SLE78](https://www.infineon.com/cms/en/product/security-smart-card-solutions/security-controllers/contactless-and-dual-interface-security-controllers/) chips are vulnerable to [ROCA](https://crocs.fi.muni.cz/public/papers/rsa_ccs17).
+This attack is only relevant if you used on-device key generation. It allows an adversary to obtain your private key, using only your public key.
+
+There isn't much that can be done to rectify this, other than generating the private RSA keys off of your device and importing them. [Other work arounds](https://crocs.fi.muni.cz/public/papers/rsa_ccs17#detection_tools_mitigation_and_workarounds). (Using the [OpenCrypto JCMathLib](https://github.com/OpenCryptoProject/JCMathLib) to handle the cryptographic functions may work too)
+
+Use [this tool](https://github.com/crocs-muni/roca#install-with-pip) to determine if your public keys are vulnerable.
+
 ## Default values
 
 The SmartPGP applet is configured with the following default values:
