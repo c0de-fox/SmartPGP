@@ -6,7 +6,7 @@
   <target name="convert">
     <javacard>
       <cap output="TestApplet.cap" sources="src" aid="aaaaaaaaaaaa" version="1.0">
-        <applet class="fr.anssi.smartpgp.TestApplet" aid="aaaaaaaaaaaa00000000000000000000"/>
+        <applet class="dev.c0de.smartpgp.TestApplet" aid="aaaaaaaaaaaa00000000000000000000"/>
       </cap>
     </javacard>
   </target>

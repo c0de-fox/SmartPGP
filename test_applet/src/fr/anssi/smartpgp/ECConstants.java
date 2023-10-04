@@ -1,4 +1,4 @@
-package fr.anssi.smartpgp;
+package dev.c0de.smartpgp;
 
 public final class ECConstants {
 

@@ -11,7 +11,7 @@
     <target name="convert">
         <javacard>
             <cap jckit="${JC303}" output="SmartPGPApplet.cap" sources="src" aid="d27600012401" version="1.0">
-                <applet class="fr.anssi.smartpgp.SmartPGPApplet" aid="d276000124010304c0deedb522560000"/>
+                <applet class="dev.c0de.smartpgp.SmartPGPApplet" aid="d276000124010304c0deedb522560000"/>
             </cap>
         </javacard>
     </target>
