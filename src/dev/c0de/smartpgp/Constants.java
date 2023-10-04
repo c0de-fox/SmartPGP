@@ -148,7 +148,10 @@ public final class Constants {
         (byte)0x73, /* card capabilities */
         (byte)0xC0, /* 1st byte: "methods supported" see ISO 7816-4 */
         (byte)0x01, /* 2nd byte: "data coding byte" idem */
-        (byte)0x80, /* 3rd byte: command chaining (not extended length by default as all readers do not support them...) */
+
+        /* 3rd byte: command chaining + extended length; Set to 0x80 if
+                     extended length is not supported by card or reader */
+        (byte)0xC0,
 
         (byte)0x05, /* status indicator byte : operational state */
         (byte)0x90, /* SW1 */
