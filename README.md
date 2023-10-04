@@ -78,40 +78,43 @@ The repository contains several directories:
 - `videos` contains sample videos demonstrating smartcard interactions
   with OpenKeychain and K9 mail on Android Nexus 5.
 
+## Build and installation instructions
 
+### Prerequisites
 
-# Build and installation instructions
-
-
-## Prerequisites
-
-- A Java compiler
-
-- A device compliant with JavaCard 3.0.1 (or above) with enough
-  available resources to hold the code (approximately 23 kB of
-  non-volatile memory), persistent data (approximately 10 kB of
-  non-volatile memory) and volatile data (approximately 2 kB of RAM).
+- A Java compiler (No higher than OpenJDK 11 or equivalent)
+- A device compliant with JavaCard 3.0.1 (or above) with enough available resources
+  - Applet: ~23 KiB of non-volatile (eeprom/flash) memory
+  - Persistant Data: ~10 KiB of non-volatile (eeprom/flash) memory
+  - Transient Data: ~2 KiB of volatile (RAM) memory
 
 <!-- - The [pyscard](https://pypi.org/project/pyscard/) and [pyasn1](https://pypi.org/project/pyasn1/)
   Python libraries for `smartcard-cli`. -->
 
+### Importing RSA keys above 2048 bits
 
-## Importing RSA keys above 2048 bits (3072 or 4096 bits)
+The default internal buffer that stores keys is configured with a default
+value that is only large enough for RSA 2048 bit keys.
 
-The size of the internal buffer is set by default to a value that
-permits to import RSA 2048 bits. If your card is able to deal with RSA
-keys of 3072 or 4096 bits and you want to be able to import such keys,
-then you need to adjust the size of this buffer:
+if your card is able to handle larger RSA key bit-lengths (3072 or 4096),
+and you want to import those keys, you will need to increase the buffer size.
 
-- for RSA 2048 bits, `Constants.INTERNAL_BUFFER_MAX_LENGTH` must be at
-  least `(short)0x3b0`;
+This can be accomplished by modifying `Constants.INTERNAL_BUFFER_MAX_LENGTH` in [Constants.java](src/dev/c0de/smartpgp/Constants.java)
 
-- for RSA 3072 bits, `Constants.INTERNAL_BUFFER_MAX_LENGTH` must be at
-  least `(short)0x570`;
+#### RSA 2048 bit keys
 
-- for RSA 4096 bits, `Constants.INTERNAL_BUFFER_MAX_LENGTH` must be at
-  least `(short)0x730`.
+When produced by OpenPGP, these keys are 949 Bytes in length.  
+`Constants.INTERNAL_BUFFER_MAX_LENGTH` may not be smaller than `(short)0x3b6` (decimal: 950)
 
+#### RSA 3072 bit keys
+
+When produced by OpenPGP, these keys are 1294 Bytes in length.  
+`Constants.INTERNAL_BUFFER_MAX_LENGTH` may not be smaller than `(short)0x50f` (decimal: 1295)
+
+#### RSA 4096 bit keys
+
+When produced by OpenPGP, these keys are 1644 Bytes in length.  
+`Constants.INTERNAL_BUFFER_MAX_LENGTH` may not be smaller than `(short)0x66d` (decimal: 1645)
 
 ## Reducing flash and/or RAM consumption
 
