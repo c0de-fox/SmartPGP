@@ -32,9 +32,11 @@ public final class Common {
     protected final RandomData random;
 
     protected Common() {
+        /* Get an instance of cryptography Ciphers */
         cipher_aes_cbc_nopad = Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_CBC_NOPAD, false);
         cipher_rsa_pkcs1 = Cipher.getInstance(Cipher.ALG_RSA_PKCS1, false);
 
+        /* Get an instance of the Secure Random Number Generator */
         random = RandomData.getInstance(RandomData.ALG_SECURE_RANDOM);
     }
 
@@ -158,8 +160,8 @@ public final class Common {
         }
     }
 
-    protected static final short writeAlgorithmInformation(final byte key_tag,
-                                                           final byte[] buf, short off) {
+    protected static final short writeAlgorithmInformation(final byte key_tag, final byte[] buf, short off) {
+
         for(short m = 2; m <= 4; ++m) {
             for(byte form = Constants.RSA_IMPORT_SUPPORTS_FORMAT_1 ? 1 : 3; form <= 3; form += 2) {
                 buf[off++] = key_tag;
