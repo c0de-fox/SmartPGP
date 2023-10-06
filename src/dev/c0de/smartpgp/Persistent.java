@@ -87,8 +87,7 @@ public final class Persistent {
     protected final OwnerPIN admin_pin; /* PW3 */
     protected byte admin_pin_length;
 
-
-
+    /* Called at Applet Install time; Reserve memory of persistent data objects */
     protected Persistent() {
         login = new byte[Constants.specialDoMaxLength()];
         login_length = 0;
