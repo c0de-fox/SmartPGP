@@ -3,5 +3,15 @@
     "license.extension": ".txt",
     "license.default": "GPL-2.0",
     "license.filename": "LICENSE",
-    "license.year": "auto"
+    "license.year": "auto",
+    "cSpell.words": [
+        "APDU",
+        "apdubuf",
+        "Infineon",
+        "minlen",
+        "nopad",
+        "offcdata",
+        "pkcs",
+        "smartpgp"
+    ]
 }
