@@ -39,11 +39,13 @@ public final class SmartPGPApplet extends Applet implements ExtendedLength {
         transients = new Transients();
     }
 
+    /* Called on applet install */
     public static final void install(byte[] buf, short off, byte len) {
+        // Reserve memory immediately 
         new SmartPGPApplet().register(buf, (short)(off + 1), buf[off]);
     }
 
-    private final PGPKey currentTagOccurenceToKey() {
+    private final PGPKey currentTagOccurrenceToKey() {
         switch(transients.currentTagOccurrence()) {
         case 0:
             return data.pgp_keys[Persistent.PGP_KEYS_OFFSET_AUT];
@@ -421,7 +423,7 @@ public final class SmartPGPApplet extends Applet implements ExtendedLength {
             break;
 
         case Constants.TAG_CARDHOLDER_CERTIFICATE:
-            k = currentTagOccurenceToKey();
+            k = currentTagOccurrenceToKey();
 
             if(k == null) {
                 ISOException.throwIt(Constants.SW_REFERENCE_DATA_NOT_FOUND);
@@ -471,7 +473,7 @@ public final class SmartPGPApplet extends Applet implements ExtendedLength {
             return 0;
         }
 
-        final PGPKey k = currentTagOccurenceToKey();
+        final PGPKey k = currentTagOccurrenceToKey();
 
         if(k == null) {
             ISOException.throwIt(Constants.SW_REFERENCE_DATA_NOT_FOUND);
@@ -1063,7 +1065,7 @@ public final class SmartPGPApplet extends Applet implements ExtendedLength {
 
             case Constants.TAG_CARDHOLDER_CERTIFICATE:
                 assertAdmin();
-                k = currentTagOccurenceToKey();
+                k = currentTagOccurrenceToKey();
                 if(k == null) {
                     ISOException.throwIt(Constants.SW_REFERENCE_DATA_NOT_FOUND);
                     return;
