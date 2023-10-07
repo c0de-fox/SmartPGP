@@ -179,6 +179,14 @@ public final class PGPKey {
         return Util.getShort(attributes, (short)3);
     }
 
+    /*
+     * !!! WARNING !!! - Read this if your JavaCard is Infineon SLE78 
+     * The API called by this function is flawed and vulnerable to ROCA.
+     * Malicious actors are able to determine the private key using ONLY the public key.
+     * 
+     * It's HIGHLY recommended that you do NOT use this API; Instead, you
+     * should generate your private key off-device, then import it later
+     */
     private final KeyPair generateRSA() {
         final PrivateKey priv = (PrivateKey)KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_CRT_PRIVATE, rsaModulusBitSize(), false);
         final RSAPublicKey pub = (RSAPublicKey)KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, rsaModulusBitSize(), false);
