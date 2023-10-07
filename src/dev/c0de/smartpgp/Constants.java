@@ -30,40 +30,46 @@ public final class Constants {
 
     protected static final short APDU_MAX_LENGTH = (short)0x400;
 
+    /* See section 4.3.2 of the specification; Default is NONE; Standard UTF-8 PWs*/
     protected static final byte[] KEY_DERIVATION_FUNCTION_DEFAULT = {
         (byte)0x81, (byte)0x01, (byte)0x00
     };
 
-    protected static final byte USER_PIN_RETRY_COUNT = 3;
-    protected static final byte USER_PIN_MIN_SIZE = 0x06;
-    protected static final byte USER_PIN_MAX_SIZE = 0x7f; /* max is 0x7f because PIN format 2 */
+    protected static final byte USER_PIN_RETRY_COUNT = 3; /* Card gets locked after this many incorrect attempts */
+    protected static final byte USER_PIN_MIN_SIZE = 0x06; /* 6 chars is minimum as defined by spec */
+    protected static final byte USER_PIN_MAX_SIZE = 0x7f; /* 127 chars is maximum as defined by spec */
+
+    /* UTF-8 bytes for the default user pin: 123456 is the value defined by the specification */
     protected static final byte[] USER_PIN_DEFAULT = {
         (byte)0x31, (byte)0x32, (byte)0x33, (byte)0x34,
         (byte)0x35, (byte)0x36
     };
 
+    /* Is the USER_PIN required for signing actions; default: true */
     protected static final boolean USER_PIN_DEFAULT_FORCE_VERIFY_SIGNATURE = true;
 
-    protected static final byte USER_PUK_RETRY_COUNT = 3;
-    protected static final byte USER_PUK_MIN_SIZE = 0x08;
-    protected static final byte USER_PUK_MAX_SIZE = 0x7f; /* max is 0x7f because PIN format 2 */
+    protected static final byte USER_PUK_RETRY_COUNT = 3; /*  */
+    protected static final byte USER_PUK_MIN_SIZE = 0x08; /* 8 chars is minimum as defined by spec */
+    protected static final byte USER_PUK_MAX_SIZE = 0x7f; /* 127 chars is maximum as defined by spec */
 
-    protected static final byte ADMIN_PIN_RETRY_COUNT = 3;
-    protected static final byte ADMIN_PIN_MIN_SIZE = 0x08;
-    protected static final byte ADMIN_PIN_MAX_SIZE = 0x7f; /* max is 0x7f because PIN format 2 */
+    protected static final byte ADMIN_PIN_RETRY_COUNT = 3; /* Card gets reset after this many failed attempts */
+    protected static final byte ADMIN_PIN_MIN_SIZE = 0x08; /* 8 chars is minimum as defined by spec */
+    protected static final byte ADMIN_PIN_MAX_SIZE = 0x7f; /* 127 chars is maximum as defined by spec */
     protected static final byte[] ADMIN_PIN_DEFAULT = {
         (byte)0x31, (byte)0x32, (byte)0x33, (byte)0x34,
         (byte)0x35, (byte)0x36, (byte)0x37, (byte)0x38
     };
 
 
-    protected static final byte FINGERPRINT_SIZE = 20;
-    protected static final byte GENERATION_DATE_SIZE = 4;
+    protected static final byte FINGERPRINT_SIZE = 20; /* size of each fingerprint in bytes */
+    protected static final byte GENERATION_DATE_SIZE = 4; /* number of bytes to store the date+time */
 
-    protected static final byte NAME_MAX_LENGTH = 39;
-    protected static final byte LANG_MIN_LENGTH = 2;
-    protected static final byte LANG_MAX_LENGTH = 8;
-    protected static final byte[] LANG_DEFAULT = { (byte)0x65, (byte)0x6e };
+    protected static final byte NAME_MAX_LENGTH = 39; /* max number of chars in cardholder name */
+    protected static final byte LANG_MIN_LENGTH = 2; /* 2 char language codes */
+    protected static final byte LANG_MAX_LENGTH = 8; /* spec allows up to 4 languages */
+    protected static final byte[] LANG_DEFAULT = { (byte)0x65, (byte)0x6e }; /* utf-8: EN */
+
+    /* Unsure if the following bytes and shorts actually need to be in card memory */
 
     protected static final byte SEX_NOT_KNOWN = (byte)0x30;
     protected static final byte SEX_MALE = (byte)0x31;
@@ -107,6 +113,8 @@ public final class Constants {
     protected static final short TAG_AES_KEY = (short)0x00d5;
     protected static final short TAG_KEY_DERIVATION_FUNCTION = (short)0x00f9;
     protected static final short TAG_ALGORITHM_INFORMATION = (short)0x00fa;
+
+    /* The bytes and shorts below appear to be needed */
 
     protected static final byte CRT_TAG_AUTHENTICATION_KEY = (byte)0xa4;
     protected static final byte CRT_TAG_SIGNATURE_KEY = (byte)0xb6;
@@ -169,9 +177,9 @@ public final class Constants {
                0x02 | /* support PSO:DEC/ENC AES */
                0x01), /* support KDF-DO */
         (byte)0x00, /* SM 0x01 = 128 bits, 0x02 = 256 bits, 0x03 = SCP11b */
-        (byte)0x00, (byte)0x20, /* max length get challenge */
-        (byte)0x04, (byte)0x80, /* max length of carholder certificate in Bytes (decimal: 1152) */
-        (byte)0x00, (byte)0xff, /* max length of special DOs (private, login, url, KDF-DO) */
+        (byte)0x00, (byte)0x20, /* max length of get challenge response in bytes (decimal: 32) */
+        (byte)0x04, (byte)0x80, /* max length of cardholder certificate in bytes (decimal: 1152) */
+        (byte)0x00, (byte)0xff, /* max length of special DOs (private, login, url, KDF-DO) in bytes (decimal: 255) */
         (byte)0x00, /* PIN format 2 is not supported */
         (byte)0x00  /* MSE not supported */
     };
@@ -217,6 +225,7 @@ public final class Constants {
     protected static final byte ALGORITHM_ATTRIBUTES_MIN_LENGTH = 6;
     protected static final byte ALGORITHM_ATTRIBUTES_MAX_LENGTH = 13;
 
+    /* FIXME: Can I modify these to get safer private key generation? */
     protected static final byte[] ALGORITHM_ATTRIBUTES_DEFAULT = {
         (byte)0x01, /* RSA */
         (byte)0x08, (byte)0x00, /* 2048 bits modulus */
