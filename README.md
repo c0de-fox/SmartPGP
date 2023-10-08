@@ -1,5 +1,7 @@
 # SmartPGP applet
 
+[![CodeFactor](https://www.codefactor.io/repository/github/c0de-fox/smartpgp/badge)](https://www.codefactor.io/repository/github/c0de-fox/smartpgp)
+
 SmartPGP is a free and open source implementation of the [OpenPGP card
 3.4 specification](https://gnupg.org/ftp/specs/OpenPGP-smart-card-application-3.4.pdf) in JavaCard.
 
